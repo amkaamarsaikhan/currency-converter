@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="icon" type="image/x-icon" href="images/currency.png">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+    <div class="converter">
+        <h2>💱 Currency Converter</h2>
+
+        <div style="text-align: left;">
+            <span class="label-text">Amount to convert:</span>
+            <input type="number" id="amount" placeholder="e.g. 1000" />
+        </div>
+
+        <div class="select-group">
+            <div style="flex: 1;">
+                <span class="label-text">From:</span>
+                <select id="fromCurrency">
+                    <option value="USD">USD</option>
+                    <option value="MNT">MNT</option>
+                    <option value="EUR">EUR</option>
+                    <option value="JPY">JPY</option>
+                </select>
+            </div>
+
+            <span style="margin-top: 20px;">→</span>
+
+            <div style="flex: 1;">
+                <span class="label-text">To:</span>
+                <select id="toCurrency">
+                    <option value="MNT">MNT</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="JPY">JPY</option>
+                </select>
+            </div>
+        </div>
+
+        <button id="convertBtn">Convert Now</button>
+
+        <div id="result">Result will appear here</div>
+    </div>
+
+    <script>
+        // DOM Element Selection
+        const amountInput = document.getElementById('amount');
+        const fromCurrency = document.getElementById('fromCurrency');
+        const toCurrency = document.getElementById('toCurrency');
+        const convertBtn = document.getElementById('convertBtn');
+        const resultDisplay = document.getElementById('result');
+
+        // Exchange Rates Object
+        const exchangeRates = {
+            USD: { MNT: 3450, EUR: 0.92, JPY: 148.5 },
+            MNT: { USD: 1 / 3450, EUR: 1 / 3750, JPY: 1 / 23.2 },
+            EUR: { USD: 1.09, MNT: 3750, JPY: 161.3 },
+            JPY: { USD: 1 / 148.5, MNT: 23.2, EUR: 1 / 161.3 }
+        };
+
+        // Conversion Function
+        function convertCurrency() {
+            const amount = parseFloat(amountInput.value);
+            const from = fromCurrency.value;
+            const to = toCurrency.value;
+
+            // Validation
+            if (isNaN(amount)) {
+                resultDisplay.textContent = 'Please enter a valid amount';
+                resultDisplay.style.color = '#dc3545'; // Error red
+                return;
+            }
+
+            resultDisplay.style.color = '#007bff'; // Success blue
+
+            // Same currency check
+            if (from === to) {
+                resultDisplay.textContent = `Result: ${amount.toLocaleString()} ${to}`;
+                return;
+            }
+
+            // Calculation: Result = Amount * Rate
+            const rate = exchangeRates[from][to];
+            const convertedAmount = amount * rate;
+
+            // Display formatted result
+            resultDisplay.textContent = `Result: ${convertedAmount.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} ${to}`;
+        }
+
+        // Event Listeners
+        convertBtn.addEventListener('click', convertCurrency);
+        amountInput.addEventListener('input', convertCurrency);
+        fromCurrency.addEventListener('change', convertCurrency);
+        toCurrency.addEventListener('change', convertCurrency);
+    </script>
+</body>
+
+</html>
