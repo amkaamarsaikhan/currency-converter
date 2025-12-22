@@ -1,0 +1,139 @@
+:root {
+    /* Primary – Navy Blue (#1E3A8A) */
+    --primary: oklch(32% 0.12 255);
+
+    /* Background – Cool Grey (#CBD5E1) */
+    --bg: oklch(86% 0.02 250);
+
+    /* Card – Ice Blue (#E0F2FE) */
+    --card: oklch(96% 0.03 230);
+
+    /* Text – Dark Navy tone */
+    --text: oklch(30% 0.04 255);
+
+    /* Secondary – Steel Blue (#64748B) */
+    --secondary: oklch(55% 0.04 250);
+
+    /* Border – Soft Cool Grey */
+    --border: oklch(88% 0.015 250);
+
+    /* Error / Red (unchanged) */
+    --red: oklch(62.7% 0.194 28.9);
+}
+
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    background: var(--card);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 25px oklch(0% 0 0 / 5%);
+}
+
+h2 { margin-top: 0; font-size: 1.4rem; text-align: center; }
+
+.input-group { margin-bottom: 1rem; }
+
+label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--secondary);
+    text-transform: uppercase;
+}
+
+input, select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 15px;
+}
+
+.arrow { padding-top: 15px; }
+
+button {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: 10px;
+}
+
+button:active { transform: scale(0.98); }
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.history-item {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.history-date {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--secondary);
+}
+
+.clear-btn {
+    background: none;
+    color: var(--red);
+    width: auto;
+    padding: 0;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+#result-display {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-top: 1.5rem;
+}
