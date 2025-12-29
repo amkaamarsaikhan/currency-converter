@@ -1,24 +1,11 @@
 :root {
-    /* Primary – Navy Blue (#1E3A8A) */
-    --primary: oklch(32% 0.12 255);
-
-    /* Background – Cool Grey (#CBD5E1) */
-    --bg: oklch(86% 0.02 250);
-
-    /* Card – Ice Blue (#E0F2FE) */
-    --card: oklch(96% 0.03 230);
-
-    /* Text – Dark Navy tone */
-    --text: oklch(30% 0.04 255);
-
-    /* Secondary – Steel Blue (#64748B) */
-    --secondary: oklch(55% 0.04 250);
-
-    /* Border – Soft Cool Grey */
-    --border: oklch(88% 0.015 250);
-
-    /* Error / Red (unchanged) */
-    --red: oklch(62.7% 0.194 28.9);
+    --primary: oklch(55% 0.15 255);   
+    --bg: oklch(98% 0.01 250);        
+    --card: oklch(100% 0 0);         
+    --text: oklch(25% 0.04 255);      
+    --secondary: oklch(65% 0.03 250);  
+    --border: oklch(92% 0.01 250);     
+    --red: oklch(62% 0.18 28);        
 }
 
 
@@ -47,9 +34,15 @@ body {
     box-shadow: 0 10px 25px oklch(0% 0 0 / 5%);
 }
 
-h2 { margin-top: 0; font-size: 1.4rem; text-align: center; }
+h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    text-align: center;
+}
 
-.input-group { margin-bottom: 1rem; }
+.input-group {
+    margin-bottom: 1rem;
+}
 
 label {
     display: block;
@@ -60,7 +53,8 @@ label {
     text-transform: uppercase;
 }
 
-input, select {
+input,
+select {
     width: 100%;
     padding: 0.8rem;
     border: 1px solid var(--border);
@@ -77,12 +71,15 @@ input, select {
     gap: 15px;
 }
 
-.arrow { padding-top: 15px; }
+.arrow {
+    padding-top: 15px;
+}
 
 button {
+    position: relative;
     width: 100%;
     padding: 1rem;
-    background: var(--primary);
+    background: var(--primary, #4caf50);
     color: white;
     border: none;
     border-radius: 0.75rem;
@@ -90,9 +87,52 @@ button {
     cursor: pointer;
     transition: 0.2s;
     margin-top: 10px;
+    overflow: visible; /* tooltip-г харуулахын тулд */
 }
 
-button:active { transform: scale(0.98); }
+button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.2);
+    transition: width 0.4s ease;
+    z-index: 0;
+    border-radius: 0.75rem;
+}
+
+button:hover::before {
+    width: 100%;
+}
+
+button::after {
+    content: "Convert";
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    background-color: #333;
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.5rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 2;
+}
+
+button:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+button span {
+    position: relative;
+    z-index: 1;
+}
 
 .history-header {
     display: flex;

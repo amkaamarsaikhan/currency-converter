@@ -6,7 +6,6 @@ const exchangeRates = {
     'CNY': { 'USD': 1/7.24, 'MNT': 476, 'EUR': 1/7.85, 'JPY': 1/0.048 }
 };
 
-// Элементүүдийг DOM-оос авах
 const amountInput = document.getElementById('amount');
 const fromSelect = document.getElementById('from');
 const toSelect = document.getElementById('to');
@@ -19,8 +18,7 @@ function updateHistoryUI() {
     historyList.innerHTML = historyData.length === 0 
         ? '<li style="text-align:center; color:var(--secondary); padding:20px;">Түүх хоосон</li>' 
         : '';
-    
-    // Түүхийг урвуу дарааллаар харуулах
+
     [...historyData].reverse().forEach(item => {
         const li = document.createElement('li');
         li.className = 'history-item';
@@ -50,7 +48,7 @@ function calculate() {
     
     resultDisplay.textContent = `${convertedAmount} ${to}`;
 
-    // Түүхийг хадгалах
+
     const entry = {
         amount: amount,
         from: from,
@@ -66,7 +64,7 @@ function calculate() {
     updateHistoryUI();
 }
 
-// Event Listeners
+
 document.getElementById('convert-btn').onclick = calculate;
 
 document.getElementById('clear-history').onclick = () => {
@@ -75,5 +73,5 @@ document.getElementById('clear-history').onclick = () => {
     updateHistoryUI();
 };
 
-// Анх ачаалахад түүхийг харуулах
+
 updateHistoryUI();
