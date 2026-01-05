@@ -1,5 +1,5 @@
-
 :root {
+    /* Light Mode (Default) */
     --primary: oklch(55% 0.15 255);   
     --bg: oklch(98% 0.01 250);        
     --card: oklch(100% 0 0);         
@@ -7,8 +7,18 @@
     --secondary: oklch(65% 0.03 250);  
     --border: oklch(92% 0.01 250);     
     --red: oklch(62% 0.18 28);        
+    --input-bg: oklch(100% 0 0);
 }
 
+[data-theme="dark"] {
+    /* Dark Mode */
+    --bg: oklch(15% 0.02 250);
+    --card: oklch(22% 0.03 255);
+    --text: oklch(95% 0.01 250);
+    --secondary: oklch(75% 0.02 250);
+    --border: oklch(30% 0.03 255);
+    --input-bg: oklch(18% 0.02 255);
+}
 
 body {
     font-family: 'Inter', system-ui, sans-serif;
@@ -16,36 +26,58 @@ body {
     color: var(--text);
     display: flex;
     justify-content: center;
-    padding: 250px 20px;
+    padding: 100px 20px; /* Padding-г багасгаж төвлөрүүлэв */
     align-items: center;
     margin: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
     width: 100%;
-    max-width: 960px;
+    max-width: 1000px; /* Layout-г илүү цэгцтэй болгохын тулд */
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
+/* Theme Toggle Styling */
+.theme-switch-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.theme-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--primary);
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px oklch(0% 0 0 / 10%);
+}
+
+.theme-btn:hover {
+    transform: scale(1.05);
+}
+
 .card {
-    width: 900px;
+
     background: var(--card);
     padding: 2rem;
     border-radius: 1.5rem;
-    box-shadow: 0 10px 25px oklch(0% 0 0 / 5%);
+    box-shadow: 0 10px 25px oklch(0% 0 0 / 8%);
+    transition: background-color 0.3s ease;
 }
 
-h2 {
-    margin-top: 0;
-    font-size: 1.4rem;
-    text-align: center;
-}
+h2 { margin-top: 0; font-size: 1.4rem; text-align: center; }
 
-.input-group {
-    margin-bottom: 1rem;
-}
+.input-group { margin-bottom: 1rem; }
 
 label {
     display: block;
@@ -56,8 +88,7 @@ label {
     text-transform: uppercase;
 }
 
-input,
-select {
+input, select {
     width: 100%;
     padding: 0.8rem;
     border: 1px solid var(--border);
@@ -65,6 +96,9 @@ select {
     font-size: 1rem;
     box-sizing: border-box;
     outline: none;
+    background: var(--input-bg);
+    color: var(--text);
+    transition: 0.3s;
 }
 
 .grid {
@@ -74,15 +108,11 @@ select {
     gap: 15px;
 }
 
-.arrow {
-    padding-top: 15px;
-}
-
 button {
     position: relative;
     width: 100%;
     padding: 1rem;
-    background: var(--primary, #4caf50);
+    background: var(--primary);
     color: white;
     border: none;
     border-radius: 0.75rem;
@@ -90,87 +120,7 @@ button {
     cursor: pointer;
     transition: 0.2s;
     margin-top: 10px;
-    overflow: visible; /* tooltip-г харуулахын тулд */
-}
 
-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 100%;
-    background-color: rgba(255,255,255,0.2);
-    transition: width 0.4s ease;
-    z-index: 0;
-    border-radius: 0.75rem;
-}
-
-button:hover::before {
-    width: 100%;
-}
-
-button::after {
-    content: "Convert";
-    position: absolute;
-    bottom: 120%;
-    left: 50%;
-    transform: translateX(-50%) translateY(0);
-    background-color: #333;
-    color: #fff;
-    padding: 0.4rem 0.8rem;
-    border-radius: 0.5rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    z-index: 2;
-}
-
-button:hover::after {
-    opacity: 1;
-    transform: translateX(-50%) translateY(-5px);
-}
-
-button span {
-    position: relative;
-    z-index: 1;
-}
-
-.history-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.history-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-.history-item {
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.9rem;
-}
-
-.history-date {
-    display: block;
-    font-size: 0.7rem;
-    color: var(--secondary);
-}
-
-.clear-btn {
-    background: none;
-    color: var(--red);
-    width: auto;
-    padding: 0;
-    font-size: 0.8rem;
-    font-weight: 500;
 }
 
 #result-display {
@@ -179,4 +129,23 @@ button span {
     font-weight: 800;
     color: var(--primary);
     margin-top: 1.5rem;
+}
+
+.history-list {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.history-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+}
+
+.clear-btn {
+    background: none;
+    color: var(--red);
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
 }
